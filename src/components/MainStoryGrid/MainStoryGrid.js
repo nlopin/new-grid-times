@@ -12,6 +12,7 @@ import MainStory from '../MainStory';
 import SecondaryStory from '../SecondaryStory';
 import OpinionStory from '../OpinionStory';
 import Advertisement from '../Advertisement';
+import {QUERIES} from "../../constants";
 
 const MainStoryGrid = () => {
   return (
@@ -23,7 +24,9 @@ const MainStoryGrid = () => {
       <SecondaryStorySection>
         <StoryList>
           {SECONDARY_STORIES.map((story, index) => (
-            <SecondaryStory key={story.id} {...story} />
+            <VerticalBlock>
+              <SecondaryStory key={story.id} {...story} />
+            </VerticalBlock>
           ))}
         </StoryList>
       </SecondaryStorySection>
@@ -32,13 +35,15 @@ const MainStoryGrid = () => {
         <SectionTitle>Opinion</SectionTitle>
         <StoryList>
           {OPINION_STORIES.map((story, index) => (
-            <OpinionStory key={story.id} {...story} />
+            <VerticalBlock>
+              <OpinionStory key={story.id} {...story} />
+            </VerticalBlock>
           ))}
         </StoryList>
       </OpinionSection>
 
       <AdvertisementSection>
-        <Advertisement />
+        <Advertisement/>
       </AdvertisementSection>
     </Wrapper>
   );
@@ -67,6 +72,14 @@ const StoryList = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const VerticalBlock = styled.div`
+  &:not(:last-of-type) {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--color-gray-300);
+  }
+`
 
 const OpinionSection = styled.section`
   grid-area: opinion-stories;
